@@ -1,14 +1,10 @@
-# ebdm-binary: Estimating Bivariate Dependency from Marginal Data (2 Binary Variables)
+# ebdm-normal: Estimating Bivariate Normal Distribution from Marginal Summaries
 
-This repository accompanies the R package **ebdm**, available on CRAN.
+This repository accompanies the continuous extension of the R package **ebdm**, now available on CRAN.
 
-The package implements a **maximum likelihood method** to estimate the joint distribution of two **binary** variables using only **marginal summary data** from multiple independent studies. This setting arises frequently in **clinical trial simulation (CTS)** where only aggregated data (e.g., proportions, sample sizes) are publicly available due to privacy constraints.
+The package implements a **maximum likelihood method** to estimate the joint distribution, especially the **correlation coefficient** (ρ) of two **normally distributed variables**, using only **marginal summary statistics** (means, variances, and sample sizes) from multiple independent studies. This is useful in privacy-preserving settings such as federated meta-analysis or clinical trial simulations (CTS) where only aggregated data are available.
 
-The method is detailed in our manuscript:
-
-> Shang, Tsao, and Zhang (2025).  
-> *Estimating the Joint Distribution of Two Binary Variables from Their Marginal Summaries*.  
-> [arXiv:2505.03995](https://doi.org/10.48550/arXiv.2505.03995)
+The method is detailed in our manuscript: (Coming Soon)
 
 ---
 
@@ -16,7 +12,13 @@ The method is detailed in our manuscript:
 
 In many real-world scenarios such as drug development, access to individual-level patient data is limited. Researchers often only observe summary-level data—such as marginal proportions of demographic or risk variables across multiple studies. Estimating the dependency structure (i.e., the joint distribution) between two such binary variables is critical for realistic clinical trial simulations, but challenging under privacy constraints.
 
-This package provides a statistically sound and computationally efficient method to estimate the **joint probability mass function** of two binary variables given their marginal summaries across multiple studies with varying sample sizes.
+In many real-world applications (e.g., drug development, biostatistics, federated learning), **individual-level data** are unavailable due to privacy concerns. Instead, researchers often only have access to **study-level summaries**, such as sample means, variances, and sizes.
+
+This package provides a **numerically stable, likelihood-based estimator** for correlation:
+- Closed-form estimates of marginal means and variances
+- 1D MLE search for correlation ρ
+- Standard errors via observed Fisher information
+- Confidence intervals via normal or likelihood-ratio methods
 
 ---
 
@@ -33,21 +35,27 @@ install.packages("ebdm")
 ## 🌰 Usage Example
 
 ```r
+# Load the package
 library(ebdm)
 
-# Load an example dataset
-data(bin_example)
+# Load continuous example data
+data(cont_example)
 
-# Estimate joint distribution using likelihood ratio method for CI
-result <- cor_bin(
-  ni = bin_example$ni,
-  xi = bin_example$xi,
-  yi = bin_example$yi,
+# Estimate correlation and other parameters with proposed MLE + likelihood ratio CI
+result <- cor_cont(
+  n     = cont_example$Sample_Size,
+  xbar  = cont_example$Mean_X,
+  ybar  = cont_example$Mean_Y,
+  s2x   = cont_example$Variance_X,
+  s2y   = cont_example$Variance_Y,
+  method = "proposed",
   ci_method = "lr"
 )
 
 print(result)
 ```
+
+You can also use `method = "weighted"` when variance estimates are unavailable.
 
 ---
 
