@@ -55,24 +55,23 @@ result <- cor_cont(
 print(result)
 ```
 
-You can also use `method = "weighted"` when variance estimates are unavailable.
+You can also use `method = "weighted"` when sample variances are unavailable.
 
 ---
 
 ## 📈 Reproducing Simulation Studies
 
-This repository includes the simulation code used in our paper to evaluate the performance of the `ebdm` package across **4*5 different settings**, with **1000 replications per setting**.
-The simulations assess estimation accuracy, confidence interval coverage, and robustness under varying sample sizes and dependency structures.
+This repository includes the simulation code used in the manuscript. It evaluates estimation accuracy, CI coverage, and SE performance under various: True correlation values, Number of studies (k) and Sample size ranges.
 
 ### Simulation Workflow Overview
 | File            | Purpose                                                                  |
 |-----------------|--------------------------------------------------------------------------|
-| `main.R`        | Core simulation logic. Takes a setting index and a seed index as input.  |
-| `submit.sh`     | Shell script to submit 1000 replications for a given setting.            |
-| `seeds.rda`     | Fixed random seeds to ensure reproducibility.                            |
+| `main.R`        | Simulates one replicate of one setting  |
+| `submit.sh`     | Submits 1000 replicates on SLURM            |
+| `seeds.rda`     | Fixed random seeds to ensure reproducibility                            |
 | `results/`      | Stores raw outputs from each simulation replicate.                       |
-| `merge_result.R`| Aggregates all simulation results.                                       |
-| `eval.R`        | Computes performance metrics and generates plots.        
+| `merge_result.R`| Merges simulation outputs                                       |
+| `eval.R`        | Summarizes coverage and plots        
 ### Run on SLURM Cluster Submit simulation jobs with:
 ```bash
 for j in 1 2 3 4;
