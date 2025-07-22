@@ -66,7 +66,7 @@ This repository includes the simulation code used in the manuscript. It evaluate
 ### Simulation Workflow Overview
 | File            | Purpose                                                                  |
 |-----------------|--------------------------------------------------------------------------|
-| `main.R`        | Simulates one replicate of one setting  |
+| `main.R`        | Simulates one replicate of all settings  |
 | `submit.sh`     | Submits 1000 replicates on SLURM            |
 | `seeds.rda`     | Fixed random seeds to ensure reproducibility                            |
 | `results/`      | Stores raw outputs from each simulation replicate.                       |
@@ -74,23 +74,21 @@ This repository includes the simulation code used in the manuscript. It evaluate
 | `eval.R`        | Summarizes coverage and plots        
 ### Run on SLURM Cluster Submit simulation jobs with:
 ```bash
-for j in 1 2 3 4;
-do
-sbatch submit.sh $j
+for i in {1..1000}; do
+sbatch submit.sh $i
 done
 ```
-Each job (`submit.sh`) runs 1000 replicates for one simulation setting.
 ### After Simulation: Merge and Evaluate
 After all simulations are completed, run `merge_result.R` to merge the results. Then use `eval.R` to analyze the merged results and generate plots, which computes:
 - Bias of point estimates
 - Empirical standard errors
 - Confidence interval coverage
-- Plots for publication
+- Plots in the manuscript
 ### Directory Structure
 ```
 simulations/
 ├── main.R
-├── submit1.sh
+├── submit.sh
 ├── seeds.rda
 ├── results/
 ├── merge_result.R
@@ -102,14 +100,7 @@ All simulation results are stored in `results/`. The seeds file ensures reproduc
 ## 📚 Citation
 
 If you use this package or method in your work, please cite:
-```bibtex
-@article{shang2025ebdm,
- title = {Estimating the Joint Distribution of Two Binary Variables from Their Marginal Summaries},
- author = {Shang, Longwen and Tsao, Min and Zhang, Xuekui},
- journal = {arXiv preprint arXiv:2505.03995},
- year = {2025}
-}
-```
+
 
 
 
