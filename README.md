@@ -95,7 +95,7 @@ simulations/
 └── eval.R
 ```
 All simulation results are stored in `results/`. The seeds file ensures reproducibility.
-### 🖥️ Session Information
+### Session Information
 The following R session information was recorded when reproducing the simulation results:
 ```r
 R version 4.4.3 (2025-02-28)
