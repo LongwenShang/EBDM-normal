@@ -4,7 +4,10 @@ This repository accompanies the continuous extension of the R package **ebdm**, 
 
 The package implements a **maximum likelihood method** to estimate the joint distribution, especially the **correlation coefficient** (ρ) of two **normally distributed variables**, using only **marginal summary statistics** (means, variances, and sample sizes) from multiple independent studies. This is useful in privacy-preserving settings such as federated meta-analysis or clinical trial simulations (CTS) where only aggregated data are available.
 
-The method is detailed in our manuscript: (Coming Soon)
+The method is detailed in our manuscript:
+> Shang, Tsao, and Zhang (2025).  
+> *Estimation of Bivariate Normal Distributions from Marginal Summaries in Clinical Trials*.  
+> [arXiv:2508.02057](https://doi.org/10.48550/arXiv.2508.02057)
 
 ---
 
