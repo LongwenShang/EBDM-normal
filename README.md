@@ -13,8 +13,6 @@ The method is detailed in our manuscript:
 
 ## 🔍 Introduction
 
-In many real-world scenarios such as drug development, access to individual-level patient data is limited. Researchers often only observe summary-level data—such as marginal proportions of demographic or risk variables across multiple studies. Estimating the dependency structure (i.e., the joint distribution) between two such binary variables is critical for realistic clinical trial simulations, but challenging under privacy constraints.
-
 In many real-world applications (e.g., drug development, biostatistics, federated learning), **individual-level data** are unavailable due to privacy concerns. Instead, researchers often only have access to **study-level summaries**, such as sample means, variances, and sizes.
 
 This package provides a **numerically stable, likelihood-based estimator** for correlation:
